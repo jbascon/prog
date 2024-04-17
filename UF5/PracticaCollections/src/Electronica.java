@@ -1,7 +1,7 @@
 public class Electronica extends Producte{
-    int diesGarantia;
+    private int diesGarantia;
 
-    public Electronica(float preu, String nom, int codiBarres, int diesGarantia) {
+    public Electronica(double preu, String nom, int codiBarres, int diesGarantia) {
         super(preu, nom, codiBarres);
         this.diesGarantia = diesGarantia;
     }
@@ -12,5 +12,10 @@ public class Electronica extends Producte{
 
     public void setDiesGarantia(int diesGarantia) {
         this.diesGarantia = diesGarantia;
+    }
+
+    @Override
+    public double getPreu() {
+        return super.getPreu() + super.getPreu() * (diesGarantia / 365.0) * 0.1;
     }
 }

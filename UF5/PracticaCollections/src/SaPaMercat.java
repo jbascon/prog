@@ -30,7 +30,40 @@ public class SaPaMercat {
                         System.out.println();
 
                         switch (opcioProducte) {
+                            case 1:
+                                System.out.println("Afegir aliment");
+                                System.out.print("Nom: ");
+                                System.out.println();
+                                System.out.print("Preu: ");
+                                System.out.println();
+                                System.out.print("Data de Caducitat: ");
+                                System.out.println();
+                                System.out.print("Codi de Barres: ");
 
+                                break;
+                            case 2:
+                                System.out.println("Afegir tèxtil");
+                                System.out.print("Nom: ");
+                                System.out.println();
+                                System.out.print("Preu: ");
+                                System.out.println();
+                                System.out.print("Composició Tèxtil: ");
+                                System.out.println();
+                                System.out.print("Codi de Barres: ");
+
+                                break;
+                            case 3:
+                                System.out.println("Afegir electrònic");
+                                System.out.print("Nom: ");
+                                System.out.println();
+                                System.out.print("Preu: ");
+                                System.out.println();
+                                System.out.print("Dies de Garantia: ");
+                                System.out.println();
+                                System.out.print("Codi de Barres: ");
+                                break;
+                            case 0:
+                                break;
                         }
                     } while (opcioProducte != 0);
 

@@ -1,21 +1,21 @@
 public abstract class Producte {
-    float preu;
-    String nom;
-    int codiBarres;
+    private double preu;
+    private String nom;
+    private int codiBarres;
 
 
-    public Producte(float preu, String nom, int codiBarres) {
+    public Producte(double preu, String nom, int codiBarres) {
         this.preu = preu;
         this.nom = nom;
         this.codiBarres = codiBarres;
     }
 
 
-    public float getPreu() {
+    public double getPreu() {
         return preu;
     }
 
-    public void setPreu(float preu) {
+    public void setPreu(double preu) {
         this.preu = preu;
     }
 

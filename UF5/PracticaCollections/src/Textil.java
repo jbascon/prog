@@ -1,7 +1,7 @@
 public class Textil extends Producte{
-    String composicioTextil;
+    private String composicioTextil;
 
-    public Textil(float preu, String nom, int codiBarres, String composicioTextil) {
+    public Textil(double preu, String nom, int codiBarres, String composicioTextil) {
         super(preu, nom, codiBarres);
         this.composicioTextil = composicioTextil;
     }
