@@ -11,8 +11,6 @@ public class CarroCompra {
         this.aliments = new HashSet<>();
         this.textils = new HashSet<>();
         this.electronics = new HashSet<>();
-
-
     }
 
     public void agregarProducte(Producte producte) {
@@ -26,7 +24,7 @@ public class CarroCompra {
         }
     }
 
-    public double calcularPrecioTotal() {
+    public double calcularPreuTotal() {
         return productes.stream().mapToDouble(Producte::getPreu).sum();
     }
 }

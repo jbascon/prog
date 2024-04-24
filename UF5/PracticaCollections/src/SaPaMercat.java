@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,18 +35,23 @@ public class SaPaMercat {
                         switch (opcioProducte) {
                             case 1:
                                 System.out.println("Afegir aliment");
+
                                 System.out.print("Nom: ");
                                 String nomAliment = scan.nextLine();
                                 System.out.println();
+
                                 System.out.print("Preu: ");
                                 double preuAliment = scan.nextDouble();
                                 System.out.println();
+
                                 System.out.print("Data de Caducitat: ");
                                 String dataCaducitatString = scan.nextLine();
                                 Date dataCaducitat = convertirDate(dataCaducitatString);
                                 System.out.println();
+
                                 System.out.print("Codi de Barres: ");
                                 String codiAliment = scan.nextLine();
+                                System.out.println();
 
                                 Alimentacio nouAliment = new Alimentacio(preuAliment, nomAliment, codiAliment, dataCaducitat);
                                 carret.agregarProducte(nouAliment);
@@ -57,24 +61,51 @@ public class SaPaMercat {
                                 break;
                             case 2:
                                 System.out.println("Afegir tèxtil");
-                                System.out.print("Nom: ");
-                                System.out.println();
-                                System.out.print("Preu: ");
-                                System.out.println();
-                                System.out.print("Composició Tèxtil: ");
-                                System.out.println();
-                                System.out.print("Codi de Barres: ");
 
+                                System.out.print("Nom: ");
+                                String nomTextil = scan.nextLine();
+                                System.out.println();
+
+                                System.out.print("Preu: ");
+                                double preuTextil = scan.nextDouble();
+                                System.out.println();
+
+                                System.out.print("Composició Tèxtil: ");
+                                String composicio = scan.nextLine();
+                                System.out.println();
+
+                                System.out.print("Codi de Barres: ");
+                                String codiTextil = scan.nextLine();
+                                System.out.println();
+
+                                Textil nouTextil = new Textil(preuTextil, nomTextil, codiTextil, composicio);
+                                carret.agregarProducte(nouTextil);
+
+                                System.out.println("Tèxtil agregat al carret correctament.");
                                 break;
                             case 3:
                                 System.out.println("Afegir electrònic");
+
                                 System.out.print("Nom: ");
+                                String nomElectronic = scan.nextLine();
                                 System.out.println();
+
                                 System.out.print("Preu: ");
+                                double preuElectronic = scan.nextDouble();
                                 System.out.println();
+
                                 System.out.print("Dies de Garantia: ");
                                 System.out.println();
+                                int diesGarantia = scan.nextInt();
+
                                 System.out.print("Codi de Barres: ");
+                                String codiElectronic = scan.nextLine();
+                                System.out.println();
+
+                                Electronica nouElectronic = new Electronica(preuElectronic, nomElectronic, codiElectronic, diesGarantia);
+                                carret.agregarProducte(nouElectronic);
+
+                                System.out.println("Electrònic agregat al carret correctament.");
                                 break;
                             case 0:
                                 break;
