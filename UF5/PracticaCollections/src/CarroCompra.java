@@ -1,30 +1,35 @@
 import java.util.*;
 
+/**
+ * Classe per guardar els productes dins un "Carret de la compra"
+ */
 public class CarroCompra {
-    private List<Producte> productes;
-    private Set<Alimentacio> aliments;
-    private Set<Textil> textils;
-    private Set<Electronica> electronics;
+    final private List<Producte> productes;
+    final private Map<String, Producte> mapProductes;
 
+    /**
+     * Constructor de la classe CarroCompra
+     */
     public CarroCompra() {
-        this.productes = new LinkedList<>();
-        this.aliments = new HashSet<>();
-        this.textils = new HashSet<>();
-        this.electronics = new HashSet<>();
+        this.productes = new ArrayList<>();
+        this.mapProductes = new HashMap<>();
     }
 
+    /**
+     * Funció que permet guardar un producte en un ArrayList (carret)
+     * @param producte Producte introduït
+     */
     public void agregarProducte(Producte producte) {
         productes.add(producte);
-        if (producte instanceof Alimentacio) {
-            aliments.add((Alimentacio) producte);
-        } else if (producte instanceof Textil) {
-            textils.add((Textil) producte);
-        } else if (producte instanceof Electronica) {
-            electronics.add((Electronica) producte);
-        }
+        mapProductes.put(producte.getCodiBarres(), producte);
     }
 
+    /**
+     * Funció que calcula el preu total sumat de tots els productes
+     * @return retorna la suma total de tots els productes
+     */
     public double calcularPreuTotal() {
         return productes.stream().mapToDouble(Producte::getPreu).sum();
     }
+
 }

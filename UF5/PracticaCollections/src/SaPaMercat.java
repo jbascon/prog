@@ -3,8 +3,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Classe principal del supermercat
+ */
 public class SaPaMercat {
     static Scanner scan = new Scanner(System.in);
+
+    /**
+     * Classe main on s'obrirà el menú i escollirem les opcions del supermercat
+     * @param args paràmetre obligatori en el main
+     */
     public static void main(String[] args) {
         int opcio, opcioProducte;
         CarroCompra carret = new CarroCompra();
@@ -30,6 +38,7 @@ public class SaPaMercat {
                         System.out.println("0. Tornar");
                         System.out.print("Quin producte vols entrar: ");
                         opcioProducte = scan.nextInt();
+                        scan.nextLine();
                         System.out.println();
 
                         switch (opcioProducte) {
@@ -38,20 +47,19 @@ public class SaPaMercat {
 
                                 System.out.print("Nom: ");
                                 String nomAliment = scan.nextLine();
-                                System.out.println();
 
                                 System.out.print("Preu: ");
                                 double preuAliment = scan.nextDouble();
-                                System.out.println();
+                                scan.nextLine();
 
                                 System.out.print("Data de Caducitat: ");
                                 String dataCaducitatString = scan.nextLine();
-                                Date dataCaducitat = convertirDate(dataCaducitatString);
-                                System.out.println();
+
 
                                 System.out.print("Codi de Barres: ");
                                 String codiAliment = scan.nextLine();
-                                System.out.println();
+
+                                Date dataCaducitat = convertirDate(dataCaducitatString);
 
                                 Alimentacio nouAliment = new Alimentacio(preuAliment, nomAliment, codiAliment, dataCaducitat);
                                 carret.agregarProducte(nouAliment);
@@ -64,19 +72,16 @@ public class SaPaMercat {
 
                                 System.out.print("Nom: ");
                                 String nomTextil = scan.nextLine();
-                                System.out.println();
 
                                 System.out.print("Preu: ");
                                 double preuTextil = scan.nextDouble();
-                                System.out.println();
+                                scan.nextLine();
 
                                 System.out.print("Composició Tèxtil: ");
                                 String composicio = scan.nextLine();
-                                System.out.println();
 
                                 System.out.print("Codi de Barres: ");
                                 String codiTextil = scan.nextLine();
-                                System.out.println();
 
                                 Textil nouTextil = new Textil(preuTextil, nomTextil, codiTextil, composicio);
                                 carret.agregarProducte(nouTextil);
@@ -88,19 +93,17 @@ public class SaPaMercat {
 
                                 System.out.print("Nom: ");
                                 String nomElectronic = scan.nextLine();
-                                System.out.println();
 
                                 System.out.print("Preu: ");
                                 double preuElectronic = scan.nextDouble();
-                                System.out.println();
+                                scan.nextLine();
 
                                 System.out.print("Dies de Garantia: ");
-                                System.out.println();
                                 int diesGarantia = scan.nextInt();
+                                scan.nextLine();
 
                                 System.out.print("Codi de Barres: ");
                                 String codiElectronic = scan.nextLine();
-                                System.out.println();
 
                                 Electronica nouElectronic = new Electronica(preuElectronic, nomElectronic, codiElectronic, diesGarantia);
                                 carret.agregarProducte(nouElectronic);
@@ -111,7 +114,6 @@ public class SaPaMercat {
                                 break;
                         }
                     } while (opcioProducte != 0);
-
                     break;
                 case 2:
                     break;
@@ -123,6 +125,11 @@ public class SaPaMercat {
         } while (opcio != 0);
     }
 
+    /**
+     * Funció que converteix de String a Date la data de caducitat dels productes d'alimentació.
+     * @param data data d'entrada que entrem al producte d'alimentació
+     * @return retorna la data que hem entrat a Date per poder-lo afegir al carret
+     */
     private static Date convertirDate(String data) {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         try {

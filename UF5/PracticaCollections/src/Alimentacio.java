@@ -1,14 +1,24 @@
 import java.util.Date;
 
+/**
+ * Classe per guardar aliments, filla de Producte
+ */
 public class Alimentacio extends Producte{
     private Date dataCaducitat;
 
+    /**
+     * Constructor de la classe Alimentació
+     * @param preu Preu de l'aliment
+     * @param nom Nom de l'aliment
+     * @param codiBarres Codi de barres de l'aliment
+     * @param dataCaducitat Data de caducitat de l'aliment
+     */
     public Alimentacio(double preu, String nom, String codiBarres, Date dataCaducitat) {
         super(preu, nom, codiBarres);
         this.dataCaducitat = dataCaducitat;
     }
 
-
+    //Setters i Getters
     public Date getDataCaducitat() {
         return dataCaducitat;
     }
@@ -17,6 +27,10 @@ public class Alimentacio extends Producte{
         this.dataCaducitat = dataCaducitat;
     }
 
+    /**
+     * Funció que calcula el descompte segons la data de caducitat
+     * @return Retorna el preu amb el descompte
+     */
     @Override
     public double getPreu() {
         Date dataActual = new Date();
