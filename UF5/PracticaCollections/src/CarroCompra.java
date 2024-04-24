@@ -32,4 +32,11 @@ public class CarroCompra {
         return productes.stream().mapToDouble(Producte::getPreu).sum();
     }
 
+    public String trobarProducte(String codiBarres) {
+        if (mapProductes.containsKey(codiBarres)) {
+            return mapProductes.get(codiBarres).getNom();
+        } else {
+            return "Producte no trobat";
+        }
+    }
 }
