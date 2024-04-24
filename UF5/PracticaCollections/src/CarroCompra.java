@@ -6,7 +6,7 @@ public class CarroCompra {
     private Set<Textil> textils;
     private Set<Electronica> electronics;
 
-    public CarroCompra(List<Producte> productes, Set<Alimentacio> aliments, Set<Textil> textils, Set<Electronica> electronics) {
+    public CarroCompra() {
         this.productes = new LinkedList<>();
         this.aliments = new HashSet<>();
         this.textils = new HashSet<>();

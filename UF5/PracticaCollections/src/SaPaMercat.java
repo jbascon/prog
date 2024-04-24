@@ -1,9 +1,14 @@
+import java.sql.SQLOutput;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class SaPaMercat {
     static Scanner scan = new Scanner(System.in);
     public static void main(String[] args) {
         int opcio, opcioProducte;
+        CarroCompra carret = new CarroCompra();
 
         do {
             System.out.println("Benvingut al SaPaMercat");
@@ -32,12 +37,22 @@ public class SaPaMercat {
                             case 1:
                                 System.out.println("Afegir aliment");
                                 System.out.print("Nom: ");
+                                String nomAliment = scan.nextLine();
                                 System.out.println();
                                 System.out.print("Preu: ");
+                                double preuAliment = scan.nextDouble();
                                 System.out.println();
                                 System.out.print("Data de Caducitat: ");
+                                String dataCaducitatString = scan.nextLine();
+                                Date dataCaducitat = convertirDate(dataCaducitatString);
                                 System.out.println();
                                 System.out.print("Codi de Barres: ");
+                                String codiAliment = scan.nextLine();
+
+                                Alimentacio nouAliment = new Alimentacio(preuAliment, nomAliment, codiAliment, dataCaducitat);
+                                carret.agregarProducte(nouAliment);
+
+                                System.out.println("Aliment agregat al carret correctament.");
 
                                 break;
                             case 2:
@@ -77,5 +92,14 @@ public class SaPaMercat {
         } while (opcio != 0);
     }
 
-
+    private static Date convertirDate(String data) {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            return format.parse(data);
+        } catch (ParseException e) {
+            System.out.println("No s'ha pogut convertir la data per un error de parsejat.");
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

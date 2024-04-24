@@ -1,7 +1,7 @@
 public class Electronica extends Producte{
     private int diesGarantia;
 
-    public Electronica(double preu, String nom, int codiBarres, int diesGarantia) {
+    public Electronica(double preu, String nom, String codiBarres, int diesGarantia) {
         super(preu, nom, codiBarres);
         this.diesGarantia = diesGarantia;
     }

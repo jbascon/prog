@@ -1,10 +1,9 @@
 public abstract class Producte {
     private double preu;
-    private String nom;
-    private int codiBarres;
+    private String nom, codiBarres;
 
 
-    public Producte(double preu, String nom, int codiBarres) {
+    public Producte(double preu, String nom, String codiBarres) {
         this.preu = preu;
         this.nom = nom;
         this.codiBarres = codiBarres;
@@ -27,11 +26,11 @@ public abstract class Producte {
         this.nom = nom;
     }
 
-    public int getCodiBarres() {
+    public String getCodiBarres() {
         return codiBarres;
     }
 
-    public void setCodiBarres(int codiBarres) {
+    public void setCodiBarres(String codiBarres) {
         this.codiBarres = codiBarres;
     }
 }
