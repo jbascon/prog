@@ -118,6 +118,7 @@ public class SaPaMercat {
                 case 2:
                     break;
                 case 3:
+                    carret.mostrarCarret();
                     break;
                 case 4:
                     break;

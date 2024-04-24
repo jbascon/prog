@@ -6,6 +6,7 @@ import java.util.*;
 public class CarroCompra {
     final private List<Producte> productes;
     final private Map<String, Producte> mapProductes;
+    final private Map<String, Integer> mapQuantitat;
 
     /**
      * Constructor de la classe CarroCompra
@@ -13,6 +14,7 @@ public class CarroCompra {
     public CarroCompra() {
         this.productes = new ArrayList<>();
         this.mapProductes = new HashMap<>();
+        this.mapQuantitat = new HashMap<>();
     }
 
     /**
@@ -21,7 +23,19 @@ public class CarroCompra {
      */
     public void agregarProducte(Producte producte) {
         productes.add(producte);
-        mapProductes.put(producte.getCodiBarres(), producte);
+        String codiBarres = producte.getCodiBarres();
+        mapQuantitat.put(codiBarres, mapQuantitat.getOrDefault(codiBarres, 0) + 1);
+    }
+
+    public void mostrarCarret() {
+        System.out.println("Carret: ");
+
+        for (Producte producte : productes) {
+            String nom = producte.getNom();
+            String codiBarres = producte.getCodiBarres();
+            int quantitat = mapQuantitat.get(codiBarres);
+            System.out.println(nom + " -> " + quantitat );
+        }
     }
 
     /**
@@ -32,6 +46,11 @@ public class CarroCompra {
         return productes.stream().mapToDouble(Producte::getPreu).sum();
     }
 
+    /**
+     * Funció que troba un producte a través del codi de barres
+     * @param codiBarres Codi de barres d'un producte
+     * @return Retorna el nom del producte trobat gràcies al codi de barres
+     */
     public String trobarProducte(String codiBarres) {
         if (mapProductes.containsKey(codiBarres)) {
             return mapProductes.get(codiBarres).getNom();
