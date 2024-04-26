@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -5,8 +6,7 @@ import java.util.*;
  */
 public class CarroCompra {
     final private List<Producte> productes;
-    final private Map<String, Producte> mapProductes;
-    final private Map<String, Integer> mapQuantitat;
+    final private Map<String, Integer> mapProductes;
 
     /**
      * Constructor de la classe CarroCompra
@@ -14,7 +14,6 @@ public class CarroCompra {
     public CarroCompra() {
         this.productes = new ArrayList<>();
         this.mapProductes = new HashMap<>();
-        this.mapQuantitat = new HashMap<>();
     }
 
     /**
@@ -24,7 +23,40 @@ public class CarroCompra {
     public void agregarProducte(Producte producte) {
         productes.add(producte);
         String codiBarres = producte.getCodiBarres();
-        mapQuantitat.put(codiBarres, mapQuantitat.getOrDefault(codiBarres, 0) + 1);
+        mapProductes.put(codiBarres, mapProductes.getOrDefault(codiBarres, 0) + 1);
+    }
+
+    public void passarTicketCompra() {
+        Date todayDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String dataActual = sdf.format(todayDate);
+
+        System.out.println("---------------------");
+        System.out.println("SaPaMercat");
+        System.out.println("---------------------");
+        System.out.println("Data: " + dataActual);
+        System.out.println("---------------------");
+
+        for (Producte producte : productes) {
+            String codiBarres = producte.getCodiBarres();
+            mapProductes.put(codiBarres, mapProductes.getOrDefault(codiBarres, 0) + 1);
+        }
+
+        double ticketTotal = 0.0;
+        for (Map.Entry<String, Integer> entry : mapProductes.entrySet()) {
+            String codiBarres = entry.getKey();
+            int quantitat = entry.getValue();
+            Producte producte = trobarProducte(codiBarres).get();
+            double preuUnitari = producte.getPreu();
+            double preuTotal = preuUnitari * quantitat;
+            System.out.println("Nom: " +  producte.getNom() + " Quantitat: "+ quantitat + " Preu Total: " + preuTotal);
+            ticketTotal += preuTotal;
+        }
+
+        System.out.println("---------------------");
+        System.out.println("Total: " + ticketTotal);
+
+        buidarCarret();
     }
 
     public void mostrarCarret() {
@@ -33,29 +65,29 @@ public class CarroCompra {
         for (Producte producte : productes) {
             String nom = producte.getNom();
             String codiBarres = producte.getCodiBarres();
-            int quantitat = mapQuantitat.get(codiBarres);
-            System.out.println(nom + " -> " + quantitat );
+            int quantitat = mapProductes.get(codiBarres);
+            System.out.println(nom + " -> " + quantitat);
         }
     }
 
-    /**
-     * Funció que calcula el preu total sumat de tots els productes
-     * @return retorna la suma total de tots els productes
-     */
-    public double calcularPreuTotal() {
-        return productes.stream().mapToDouble(Producte::getPreu).sum();
-    }
 
     /**
      * Funció que troba un producte a través del codi de barres
+     *
      * @param codiBarres Codi de barres d'un producte
      * @return Retorna el nom del producte trobat gràcies al codi de barres
      */
-    public String trobarProducte(String codiBarres) {
-        if (mapProductes.containsKey(codiBarres)) {
-            return mapProductes.get(codiBarres).getNom();
-        } else {
-            return "Producte no trobat";
+    public Optional<Producte> trobarProducte(String codiBarres) {
+        for (Producte producte : productes) {
+            if (producte.getCodiBarres().equals(codiBarres)) {
+                return Optional.of(producte);
+            }
         }
+        return Optional.empty();
     }
+
+    public void buidarCarret() {
+        productes.clear();
+    }
+
 }

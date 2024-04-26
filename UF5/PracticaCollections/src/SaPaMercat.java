@@ -29,7 +29,7 @@ public class SaPaMercat {
             System.out.println();
 
             switch (opcio) {
-                case 1:
+                case 1 -> {
                     do {
                         System.out.println("---Producte---");
                         System.out.println("1. Alimentació");
@@ -42,86 +42,65 @@ public class SaPaMercat {
                         System.out.println();
 
                         switch (opcioProducte) {
-                            case 1:
+                            case 1 -> {
                                 System.out.println("Afegir aliment");
-
                                 System.out.print("Nom: ");
                                 String nomAliment = scan.nextLine();
-
                                 System.out.print("Preu: ");
                                 double preuAliment = scan.nextDouble();
                                 scan.nextLine();
-
                                 System.out.print("Data de Caducitat: ");
                                 String dataCaducitatString = scan.nextLine();
-
-
                                 System.out.print("Codi de Barres: ");
                                 String codiAliment = scan.nextLine();
-
                                 Date dataCaducitat = convertirDate(dataCaducitatString);
-
                                 Alimentacio nouAliment = new Alimentacio(preuAliment, nomAliment, codiAliment, dataCaducitat);
                                 carret.agregarProducte(nouAliment);
-
                                 System.out.println("Aliment agregat al carret correctament.");
-
-                                break;
-                            case 2:
+                            }
+                            case 2 -> {
                                 System.out.println("Afegir tèxtil");
-
                                 System.out.print("Nom: ");
                                 String nomTextil = scan.nextLine();
-
                                 System.out.print("Preu: ");
                                 double preuTextil = scan.nextDouble();
                                 scan.nextLine();
-
                                 System.out.print("Composició Tèxtil: ");
                                 String composicio = scan.nextLine();
-
                                 System.out.print("Codi de Barres: ");
                                 String codiTextil = scan.nextLine();
-
                                 Textil nouTextil = new Textil(preuTextil, nomTextil, codiTextil, composicio);
                                 carret.agregarProducte(nouTextil);
-
                                 System.out.println("Tèxtil agregat al carret correctament.");
-                                break;
-                            case 3:
+                            }
+                            case 3 -> {
                                 System.out.println("Afegir electrònic");
-
                                 System.out.print("Nom: ");
                                 String nomElectronic = scan.nextLine();
-
                                 System.out.print("Preu: ");
                                 double preuElectronic = scan.nextDouble();
                                 scan.nextLine();
-
                                 System.out.print("Dies de Garantia: ");
                                 int diesGarantia = scan.nextInt();
                                 scan.nextLine();
-
                                 System.out.print("Codi de Barres: ");
                                 String codiElectronic = scan.nextLine();
-
                                 Electronica nouElectronic = new Electronica(preuElectronic, nomElectronic, codiElectronic, diesGarantia);
                                 carret.agregarProducte(nouElectronic);
-
                                 System.out.println("Electrònic agregat al carret correctament.");
-                                break;
-                            case 0:
-                                break;
+                            }
+                            case 0 -> {
+                            }
                         }
                     } while (opcioProducte != 0);
-                    break;
-                case 2:
-                    break;
-                case 3:
+                }
+                case 2 -> carret.passarTicketCompra();
+                case 3 -> {
                     carret.mostrarCarret();
-                    break;
-                case 4:
-                    break;
+                    System.out.println();
+                }
+                case 4 -> {
+                }
             }
         } while (opcio != 0);
     }
