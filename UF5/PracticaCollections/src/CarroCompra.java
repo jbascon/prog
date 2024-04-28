@@ -6,6 +6,7 @@ import java.util.*;
  * Classe per guardar els productes dins un "Carret de la compra"
  */
 public class CarroCompra {
+    //Creem un ArrayList i un HashMap per guardar els productes i les dades
     final private List<Producte> productes;
     final private Map<String, Integer> mapProductes;
 
@@ -31,6 +32,10 @@ public class CarroCompra {
         }
     }
 
+    /**
+     * Funció que comprova si existeix el fitxer per guardar preus
+     * @throws IOException Excepció utilitzada
+     */
     public void actualitzarPreus() throws IOException {
         try {
             File f = new File("./updates/UpdateTextilPrices.dat");
@@ -44,6 +49,11 @@ public class CarroCompra {
         }
     }
 
+    /**
+     * Funció que utilitza printWriter per guardar un registre de les excepcions que ocurreixen
+     * @param e Excepció
+     * @throws IOException Excepció utilitzada
+     */
     public void registrarException(Exception e) throws IOException {
         try (PrintWriter writer = new PrintWriter(new FileWriter("./logs/Exceptions.dat", true))) {
             writer.println("Data: " + new Date());
@@ -56,8 +66,13 @@ public class CarroCompra {
         }
     }
 
-    private void procesarArchivoUpdateTextil(File archivo) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
+    /**
+     * Funció que guarda i processa els preus dels productes tèxtiles
+     * @param f File utilitzat
+     * @throws IOException Excepció utilitzada
+     */
+    private void procesarArchivoUpdateTextil(File f) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
             String linia;
             while ((linia = reader.readLine()) != null) {
 

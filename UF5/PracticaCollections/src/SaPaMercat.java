@@ -15,9 +15,11 @@ public class SaPaMercat {
      * @param args paràmetre obligatori en el main
      */
     public static void main(String[] args) throws IOException {
+        //Variables pels switchs i el carret.
         int opcio, opcioProducte;
         CarroCompra carret = new CarroCompra();
 
+        //Menu principal
         do {
             System.out.println("Benvingut al SaPaMercat");
             System.out.println("---------Inici---------");
@@ -29,6 +31,7 @@ public class SaPaMercat {
             opcio = scan.nextInt();
             System.out.println();
 
+            //Switch per escollir quin tipus de producte afegir
             switch (opcio) {
                 case 1 -> {
                     do {
@@ -42,6 +45,7 @@ public class SaPaMercat {
                         scan.nextLine();
                         System.out.println();
 
+                        //Switch per introduïr les dades una a una dels productes
                         switch (opcioProducte) {
                             case 1 -> {
                                 System.out.println("Afegir aliment");
