@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +14,7 @@ public class SaPaMercat {
      * Classe main on s'obrirà el menú i escollirem les opcions del supermercat
      * @param args paràmetre obligatori en el main
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int opcio, opcioProducte;
         CarroCompra carret = new CarroCompra();
 
@@ -94,7 +95,10 @@ public class SaPaMercat {
                         }
                     } while (opcioProducte != 0);
                 }
-                case 2 -> carret.passarTicketCompra();
+                case 2 -> {
+                    carret.actualitzarPreus();
+                    carret.passarTicketCompra();
+                }
                 case 3 -> {
                     carret.mostrarCarret();
                     System.out.println();

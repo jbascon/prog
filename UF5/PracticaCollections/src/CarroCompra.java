@@ -1,3 +1,4 @@
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -21,9 +22,69 @@ public class CarroCompra {
      * @param producte Producte introduït
      */
     public void agregarProducte(Producte producte) {
-        productes.add(producte);
-        String codiBarres = producte.getCodiBarres();
-        mapProductes.put(codiBarres, mapProductes.getOrDefault(codiBarres, 0) + 1);
+        if (producte.getNom().length() > 15) {
+            throw new IllegalArgumentException("El nom del producte és massa llarg");
+        } else {
+            productes.add(producte);
+            String codiBarres = producte.getCodiBarres();
+            mapProductes.put(codiBarres, mapProductes.getOrDefault(codiBarres, 0) + 1);
+        }
+    }
+
+    public void actualitzarPreus() throws IOException {
+        try {
+            File f = new File("./updates/UpdateTextilPrices.dat");
+            if (f.exists()) {
+                procesarArchivoUpdateTextil(f);
+            }
+        } catch (IOException e) {
+            registrarException(e);
+        } catch (Exception e) {
+            registrarException(e);
+        }
+    }
+
+    public void registrarException(Exception e) throws IOException {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("./logs/Exceptions.dat", true))) {
+            writer.println("Data: " + new Date());
+            writer.println("Missatge: " + e.getMessage());
+            writer.println("Tipus: " + e.getClass().getName());
+            writer.println("Stack Trace:");
+            e.printStackTrace(writer);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void procesarArchivoUpdateTextil(File archivo) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
+            String linia;
+            while ((linia = reader.readLine()) != null) {
+
+                String[] parts = linia.split(",");
+
+
+                if (parts.length == 2) {
+                    String codiBarres = parts[0].trim();
+                    double nouPreu = Double.parseDouble(parts[1].trim());
+
+                    Optional<Producte> producteOptional = trobarProducte(codiBarres);
+                    if (producteOptional.isPresent()) {
+                        Producte producte = producteOptional.get();
+
+                        if (producte instanceof Textil) {
+                            Textil textil = (Textil) producte;
+                            textil.setPreu(nouPreu);
+                            System.out.println("Preu del tèxtil amb codi de barres " + codiBarres + " actualitzat a " + nouPreu + ".");
+                        } else {
+                            System.out.println("El producte amb codi de barres " + codiBarres + " no és un producte tèxtil.");
+                        }
+                    } else {
+                        System.out.println("No s'ha trobat cap producte amb el codi de barres " + codiBarres + ".");
+                    }
+                }
+            }
+        }
     }
 
     public void passarTicketCompra() {
